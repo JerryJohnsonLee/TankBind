@@ -19,6 +19,8 @@ import requests
 from rdkit.Geometry import Point3D
 
 from torchdrug import data as td     # conda install torchdrug -c milagraph -c conda-forge -c pytorch -c pyg if fail to import
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, dir_path)
 
 def read_mol(sdf_fileName, mol2_fileName, verbose=False):
     Chem.WrapLogs()
