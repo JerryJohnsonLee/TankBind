@@ -49,14 +49,15 @@ def prepare_protein(protein_pdb, center=None, max_radius=20):
 
     # prepare protein information used as TankBind input
     info = []
-    com = ",".join([str(a.round(3)) for a in protein_dict["protein"][0].mean(axis=0).numpy()])
-    info.append(["protein", "compound", "protein_center", com])
 
     for ith_pocket, com in enumerate(pocket_coms):
         com = ",".join([str(a.round(3)) for a in com])
         info.append(["protein", "compound", f"pocket_{ith_pocket+1}", com])
+
+    if center is not None:
+        com = ",".join([str(a.round(3)) for a in protein_dict["protein"][0].mean(axis=0).numpy()])
+        info.append(["protein", "compound", "protein_center", com])
     info = pd.DataFrame(info, columns=['protein_name', 'compound_name', 'pocket_name', 'pocket_com'])
-   
     return info, protein_dict
 
 
