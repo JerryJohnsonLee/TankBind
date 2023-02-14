@@ -54,7 +54,7 @@ def prepare_protein(protein_pdb, center=None, max_radius=20):
         com = ",".join([str(a.round(3)) for a in com])
         info.append(["protein", "compound", f"pocket_{ith_pocket+1}", com])
 
-    if center is not None:
+    if center is None:
         com = ",".join([str(a.round(3)) for a in protein_dict["protein"][0].mean(axis=0).numpy()])
         info.append(["protein", "compound", "protein_center", com])
     info = pd.DataFrame(info, columns=['protein_name', 'compound_name', 'pocket_name', 'pocket_com'])
