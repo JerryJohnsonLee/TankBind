@@ -17,6 +17,12 @@ parser = PDBParser(QUIET=True)
 p2rank_cmd = "bash /home/jerry/src/p2rank_2.4/prank"
 tmp_dir = "/tmp"
 
+def check_java():
+    if shutil.which("java") is not None:
+        return True
+    else:
+        raise RuntimeError("Java is required to run code!")
+
 def prepare_protein(protein_pdb, center=None, max_radius=20):
     global p2rank_cmd
     global tmp_dir
@@ -79,6 +85,7 @@ def parse_args():
     return args
 
 if __name__ == "__main__":
+    check_java()
     args = parse_args()
     if args.center is not None:
         args.center = np.array([float(a) for a in args.center.split(",")])
